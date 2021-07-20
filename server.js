@@ -15,5 +15,11 @@ io.on("connection", socket => {
     // Each client that connects gets their own socket id
     console.log("Nice to meet you. (shake hand)");
     //if this logs, new client successfully completed handshake
-    socket.emit("Welcome", "hello here again");
-})
+    socket.on("Welcome", (data) => {
+        // socket.broadcast.emit("new_message_from_server", data)
+    });
+
+    socket.on("new_message_from_client", data => {
+      socket.broadcast.emit("new_message_from_server", data)
+    })
+});
